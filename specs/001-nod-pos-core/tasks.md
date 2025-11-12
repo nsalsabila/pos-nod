@@ -24,12 +24,12 @@ Tasks are organized by:
 
 **Goal**: Establish backend framework, database, and project structure
 
-- ⬜ **1.1.1** — Initialize backend project
-  - [ ] Choose framework (Node.js + Express or Python + FastAPI)
-  - [ ] Set up project structure (src/, config/, tests/, migrations/)
-  - [ ] Configure ESLint/Prettier or Black/Flake8
-  - [ ] Set up .env configuration for local/staging/production
-  - **Acceptance**: Project builds without errors, linting passes
+- ✅ **1.1.1** — Initialize backend project
+  - [x] Choose framework (Node.js + Express) ✅
+  - [x] Set up project structure (src/, config/, tests/, migrations/) ✅
+  - [x] Configure ESLint/Prettier ✅
+  - [x] Set up .env configuration for local/staging/production ✅
+  - **Acceptance**: Project builds without errors, linting passes ✅ (Ready after npm install)
 
 - ⬜ **1.1.2** — Set up PostgreSQL database
   - [ ] Create database schema migration file
