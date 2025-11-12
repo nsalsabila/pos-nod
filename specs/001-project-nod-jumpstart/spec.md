@@ -5,6 +5,11 @@
 **Status**: Draft  
 **Input**: Project: NOD Jumpstart POS System; Role: Project Manager; Description: Develop a Point of Sales (POS) system for NOD Jumpstart machine capsule stores, integrated into the back office NOD dashboard. The POS will manage mobile pick-up orders and in-store orders, track order status, handle payments, print receipts, and support customer communication.
 
+## Clarifications
+
+### Session 2025-11-12
+- Q: How are mobile orders delivered to the POS? → A: Push
+
 ## Execution Flow (main)
 ```
 1. Parse user description from Input
@@ -83,6 +88,8 @@ The POS receives and processes orders from the NOD mobile app (Pick-Up) and from
 - **FR-008 — Thermal Printer Integration**: POS MUST print receipts for in-store orders via a connected thermal printer; printed receipts MUST include order summary, totals, promotions, and a timestamp.
 - **FR-009 — WhatsApp Receipt Delivery**: POS MUST be able to send a digital receipt to the customer's phone via WhatsApp with correct order details and totals.
 - **FR-010 — Observability & Auditing**: POS MUST log order events, payment attempts, and delivery attempts for receipts for troubleshooting and compliance.
+
+- **FR-013 — Order Delivery Integration (Mobile → POS)**: POS MUST expose a secure HTTP webhook endpoint to receive pushed orders from the back office/mobile system. The endpoint MUST support idempotent delivery (client_order_id) and acknowledge receipts so the sender can stop retries. Orders delivered via webhook MUST be persisted within 10 seconds and surfaced to staff.
 
 *NEEDS CLARIFICATION*
 - **FR-011**: Authentication/authorization model for store staff (SAML/SSO/OAuth/local accounts)? [NEEDS CLARIFICATION]
