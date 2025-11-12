@@ -1,50 +1,69 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+# SOLID Architecture Constitution
+<!-- Foundation for maintainable, extensible, and testable codebase -->
 
-## Core Principles
+## Core SOLID Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### S - Single Responsibility Principle (SRP)
+Each class, module, or service should have one reason to change. A component should have a single, well-defined responsibility. Benefits include easier testing, maintenance, and reduced coupling between components.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### O - Open/Closed Principle (OCP)
+Software entities should be open for extension but closed for modification. Design components to accept new behavior through composition, inheritance, or dependency injection rather than changing existing code. Enables feature additions without risking existing functionality.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### L - Liskov Substitution Principle (LSP)
+Subtypes must be substitutable for their base types without breaking functionality. Derived classes should honor the contracts of their parent classes. Ensures polymorphism works correctly and prevents unexpected runtime failures.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### I - Interface Segregation Principle (ISP)
+Clients should not be forced to depend on interfaces they don't use. Prefer many client-specific, focused interfaces over one general-purpose interface. Reduces coupling and makes dependencies explicit.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### D - Dependency Inversion Principle (DIP)
+High-level modules should not depend on low-level modules; both should depend on abstractions. Inject dependencies rather than creating them internally. Enables flexible composition, easier testing via mocks, and cleaner architecture.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+## Architecture Constraints
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+### Single Responsibility in Design
+- Each module/class must have a clearly defined purpose
+- Split responsibilities across multiple files/classes if a single file exceeds 300 lines of business logic
+- Use naming conventions that explicitly describe responsibility (e.g., `UserRepository`, `EmailValidator`, `OrderProcessor`)
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+### Extension Points & Abstraction Layers
+- Define interfaces/contracts for external dependencies
+- Use dependency injection to decouple concrete implementations
+- Avoid hardcoding external service calls or configurations
+- Support plugin-based extensions where applicable
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+### Contract Compliance
+- Maintain backward compatibility in public APIs (honor LSP)
+- Document all interface contracts with examples
+- Version breaking changes with clear migration paths
+- Ensure mock-friendliness: all external dependencies injectable
+
+## Development Workflow
+
+### Code Review Checklist - SOLID Compliance
+- [ ] Does each class/function have a single, clear responsibility?
+- [ ] Are dependencies injected rather than created internally?
+- [ ] Could this be extended without modifying existing code?
+- [ ] Are interfaces segregated (clients don't depend on unused methods)?
+- [ ] Would derived classes safely substitute for base types (LSP)?
+
+### Testing Requirements
+- Unit tests for each component in isolation (SRP enables this)
+- Mock external dependencies (DIP enables this)
+- Contract tests for interface implementations (LSP verification)
+- Integration tests for dependency chains
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+### Constitutional Authority
+- SOLID principles supersede all implementation choices
+- Every architectural decision must justify alignment with at least one SOLID principle
+- Code that violates SOLID principles must be refactored or rejected in review
+- Exceptions require documented justification and team consensus
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+### Amendment Process
+- Proposed changes to this constitution require impact analysis
+- All amendments must include: rationale, affected areas, and migration strategy
+- Changes take effect only after documented approval
+- Retroactive compliance plans required for legacy code
+
+**Version**: 1.0.0 | **Ratified**: 2025-11-12 | **Last Amended**: 2025-11-12 | **Framework**: SOLID Principles
