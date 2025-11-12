@@ -1,0 +1,180 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Core Entities
+
+model Store {
+  id            String   @id @default(cuid())
+  name          String
+  phone         String
+  email         String?
+  address       String?
+  printerConfig String?  @db.Json
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  orders      Order[]
+  menuItems   MenuItem[]
+  promotions  Promotion[]
+  customers   Customer[]
+  payments    Payment[]
+  receipts    Receipt[]
+  orderEvents OrderEvent[]
+
+  @@map("stores")
+}
+
+model Order {
+  id              String   @id @default(cuid())
+  storeId         String
+  store           Store    @relation(fields: [storeId], references: [id])
+  clientOrderId   String   // From mobile app
+  source          String   // mobile_pickup | in_store
+  status          String   @default("pending") // pending, processing, completed, cancelled
+  customerId      String
+  customer        Customer @relation(fields: [customerId], references: [id])
+  items           String   @db.Json // Array of {menuItemId, variantId, quantity, unitPrice}
+  subtotal        Float
+  discountAmount  Float    @default(0)
+  taxAmount       Float    @default(0)
+  total           Float
+  paymentId       String?
+  payment         Payment? @relation(fields: [paymentId], references: [id])
+  promotionIds    String[] @db.Json // Array of promotion IDs applied
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  completedAt     DateTime?
+
+  receipts    Receipt[]
+  orderEvents OrderEvent[]
+
+  @@unique([storeId, clientOrderId])
+  @@index([storeId])
+  @@index([customerId])
+  @@index([status])
+  @@index([createdAt])
+  @@map("orders")
+}
+
+model Customer {
+  id                 String   @id @default(cuid())
+  storeId            String
+  store              Store    @relation(fields: [storeId], references: [id])
+  phone              String
+  name               String
+  email              String?
+  contactPreference  String   @default("whatsapp") // none, sms, whatsapp, email
+  createdAt          DateTime @default(now())
+
+  orders Order[]
+
+  @@unique([storeId, phone])
+  @@index([storeId])
+  @@map("customers")
+}
+
+model MenuItem {
+  id           String   @id @default(cuid())
+  storeId      String
+  store        Store    @relation(fields: [storeId], references: [id])
+  name         String
+  basePrice    Float
+  available    Boolean  @default(true)
+  variants     String   @db.Json // Array of {id, name, priceDelta}
+  syncedAt     DateTime @default(now())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@unique([storeId, name])
+  @@index([storeId])
+  @@map("menu_items")
+}
+
+model Variant {
+  id         String @id @default(cuid())
+  name       String
+  priceDelta Float
+}
+
+model Payment {
+  id                   String   @id @default(cuid())
+  orderId              String
+  order                Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  method               String   // qris, gopay, shopeepay, credit_card, debit_card
+  provider             String   // xendit, stripe, adyen, gopay_api, shopeepay_api
+  status               String   @default("pending") // pending, processing, success, failed, refunded
+  amount               Float
+  providerReference    String?
+  receiptNumber        String?
+  createdAt            DateTime @default(now())
+  completedAt          DateTime?
+
+  @@index([orderId])
+  @@index([status])
+  @@map("payments")
+}
+
+model Receipt {
+  id               String   @id @default(cuid())
+  orderId          String
+  order            Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  channel          String   // thermal, whatsapp
+  status           String   @default("pending") // pending, sent, failed, retrying
+  content          String   @db.Json // Receipt content
+  deliveryAttempts Int      @default(0)
+  lastAttemptAt    DateTime?
+  deliveredAt      DateTime?
+  createdAt        DateTime @default(now())
+
+  @@index([orderId])
+  @@index([status])
+  @@map("receipts")
+}
+
+model OrderEvent {
+  id        String   @id @default(cuid())
+  storeId   String
+  store     Store    @relation(fields: [storeId], references: [id])
+  orderId   String
+  order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  eventType String   // created, status_changed, payment_received, receipt_sent, cancelled
+  actorId   String   // user_id or system
+  data      String   @db.Json // Event-specific data
+  timestamp DateTime @default(now())
+
+  @@index([orderId])
+  @@index([eventType])
+  @@index([timestamp])
+  @@map("order_events")
+}
+
+model Promotion {
+  id              String   @id @default(cuid())
+  storeId         String
+  store           Store    @relation(fields: [storeId], references: [id])
+  code            String
+  type            String   // percentage, fixed_amount
+  value           Float
+  minOrderAmount  Float?
+  maxDiscount     Float?
+  validFrom       DateTime
+  validUntil      DateTime
+  usageLimit      Int?
+  usageCount      Int      @default(0)
+  active          Boolean  @default(true)
+  createdAt       DateTime @default(now())
+
+  @@unique([storeId, code])
+  @@index([storeId])
+  @@index([active])
+  @@map("promotions")
+}
