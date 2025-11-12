@@ -1,6 +1,6 @@
-# Implementation Plan: NOD Jumpstart POS System
+# Implementation Plan: NOD POS System
 
-**Feature Branch**: `001-project-nod-jumpstart`  
+**Feature Branch**: `001-nod-pos-core`  
 **Plan Created**: 2025-11-13  
 **Status**: Draft  
 **Based On**: `spec.md` (Specification version: Draft)
@@ -9,7 +9,7 @@
 
 ## Executive Summary
 
-The NOD Jumpstart POS System is a cloud-native, real-time Point of Sales platform designed to:
+The NOD POS System is a cloud-native, real-time Point of Sales platform designed to:
 - Receive and process Pick-Up orders from the NOD mobile app via secure webhooks
 - Enable in-store order creation and management for walk-in customers
 - Integrate multi-method payment processing (QRIS, e-wallets, cards)

@@ -139,12 +139,12 @@ Every implementation respects:
 
 ## Current Features
 
-### 001 - NOD Jumpstart POS System
+### 001 - NOD POS Core System
 
 The first feature demonstrates the full spec-driven workflow:
 
 ```
-specs/001-project-nod-jumpstart/
+specs/001-nod-pos-core/
 ├── spec.md          # Complete feature specification
 └── ...
 ```

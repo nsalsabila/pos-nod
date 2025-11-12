@@ -1,6 +1,6 @@
-# Implementation Tasks: NOD Jumpstart POS System
+# Implementation Tasks: NOD POS System
 
-**Feature Branch**: `001-project-nod-jumpstart`  
+**Feature Branch**: `001-nod-pos-core`  
 **Tasks Created**: 2025-11-13  
 **Based On**: `plan.md` (Implementation Plan)  
 **Format**: Checklist organized by user story and delivery phase

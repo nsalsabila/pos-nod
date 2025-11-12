@@ -1,9 +1,9 @@
-# Feature Specification: NOD Jumpstart POS System
+# Feature Specification: NOD POS System
 
-**Feature Branch**: `001-project-nod-jumpstart`  
+**Feature Branch**: `001-nod-pos-core`  
 **Created**: 2025-11-12  
 **Status**: Draft  
-**Input**: Project: NOD Jumpstart POS System; Role: Project Manager; Description: Develop a Point of Sales (POS) system for NOD Jumpstart machine capsule stores, integrated into the back office NOD dashboard. The POS will manage mobile pick-up orders and in-store orders, track order status, handle payments, print receipts, and support customer communication.
+**Input**: Project: NOD POS System; Role: Project Manager; Description: Develop a Point of Sales (POS) system for NOD machine capsule stores, integrated into the back office NOD dashboard. The POS will manage mobile pick-up orders and in-store orders, track order status, handle payments, print receipts, and support customer communication.
 
 ## Clarifications
 
