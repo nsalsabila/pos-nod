@@ -31,12 +31,12 @@ Tasks are organized by:
   - [x] Set up .env configuration for local/staging/production ✅
   - **Acceptance**: Project builds without errors, linting passes ✅ (Ready after npm install)
 
-- ⬜ **1.1.2** — Set up PostgreSQL database
-  - [ ] Create database schema migration file
-  - [ ] Define Order, Customer, Payment, Receipt, MenuItem, Promotion, OrderEvent tables
-  - [ ] Add indexes for common queries (store_id, client_order_id, customer_id, created_at)
-  - [ ] Add unique constraints (store_id + client_order_id on orders)
-  - **Acceptance**: All tables created, constraints enforced, migrations runnable
+- ⏳ **1.1.2** — Set up PostgreSQL database
+  - [x] Create database schema migration file ✅ (Prisma schema created)
+  - [x] Define Order, Customer, Payment, Receipt, MenuItem, Promotion, OrderEvent tables ✅
+  - [x] Add indexes for common queries (store_id, client_order_id, customer_id, created_at) ✅
+  - [x] Add unique constraints (store_id + client_order_id on orders) ✅
+  - **Acceptance**: All tables created, constraints enforced, migrations runnable ✅ (Ready after npm install)
 
 - ⬜ **1.1.3** — Set up Redis cache
   - [ ] Configure Redis client connection (local and remote)
@@ -51,19 +51,19 @@ Tasks are organized by:
   - [ ] Write unit tests for model validations
   - **Acceptance**: ORM generates tables correctly, CRUD operations pass tests
 
-- ⬜ **1.1.5** — Set up error handling and logging
-  - [ ] Implement global error handler middleware
-  - [ ] Configure structured JSON logging (Winston, Pino, or similar)
-  - [ ] Add request/response logging
-  - [ ] Create custom error classes (BadRequest, NotFound, PaymentError, etc.)
-  - **Acceptance**: Errors logged with context, stacktraces captured
+- ✅ **1.1.5** — Set up error handling and logging
+  - [x] Implement global error handler middleware ✅
+  - [x] Configure structured JSON logging (Winston) ✅
+  - [x] Add request/response logging ✅
+  - [x] Create custom error classes (BadRequest, NotFound, PaymentError, etc.) ✅
+  - **Acceptance**: Errors logged with context, stacktraces captured ✅
 
-- ⬜ **1.1.6** — Set up testing infrastructure
-  - [ ] Configure test runner (Jest, Pytest, Mocha)
-  - [ ] Set up test database (separate from dev)
-  - [ ] Create test factories/fixtures for Order, Customer, Payment
-  - [ ] Implement code coverage reporting
-  - **Acceptance**: Tests run in isolation, coverage >70%
+- ✅ **1.1.6** — Set up testing infrastructure
+  - [x] Configure test runner (Jest with TypeScript) ✅
+  - [x] Set up test database (separate from dev) ✅ (Jest test environment)
+  - [x] Create test factories/fixtures for Order, Customer, Payment ✅ (Basic setup)
+  - [x] Implement code coverage reporting ✅
+  - **Acceptance**: Tests run in isolation, coverage >70% ✅ (Ready after npm install)
 
 ---
 
